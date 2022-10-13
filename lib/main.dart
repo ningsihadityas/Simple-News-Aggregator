@@ -1,28 +1,55 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'dart:io';
-import 'package:webview_flutter/webview_flutter.dart';
+// import 'package:qlipper/form.dart';
+import 'package:qlipper/homepage/homepage.dart';
+import 'package:qlipper/login/login_page.dart';
+import 'package:qlipper/register/register.dart';
+import 'package:qlipper/views/home.dart';
+import 'homepage/homepage_login.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+      //MidtermHome()
+
+      Qlipper());
+
+  // runApp(ChangeNotifierProvider(
+  //     create: (context) => BookmarkController(), child: Qlipper()));
 }
 
-class MyApp extends StatefulWidget {
+class Qlipper extends StatefulWidget {
   @override
-  MyAppState createState() => MyAppState();
+  _QlipperState createState() => _QlipperState();
 }
 
-class MyAppState extends State<MyApp> {
+class _QlipperState extends State<Qlipper> {
   @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Qlipper',
+        theme: ThemeData(primaryColor: Colors.grey[50]),
+        home: Home());
+  }
+}
+
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
-    // Enable hybrid composition.
-    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+    Timer(
+        Duration(seconds: 4),
+        () => Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (BuildContext context) => HomePage())));
   }
 
   @override
   Widget build(BuildContext context) {
-    return WebView(
-      initialUrl: 'https://qlipper.id',
-    );
+    return Container();
   }
 }
